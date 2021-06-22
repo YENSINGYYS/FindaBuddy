@@ -14,4 +14,12 @@
   </ion-header>
 
   <app-explore-container name="Tab 3 page"></app-explore-container>
+
+
+  <ion-item *ngFor="let item of user">
+
+    <ion-label>{{item.email}}</ion-label>
+    <ion-label>{{item.username}}</ion-label>
+
+  </ion-item>
 </ion-content>

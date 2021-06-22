@@ -47,6 +47,21 @@ const corsOptions = {
     }
     });
     });
+
+//Get User Details
+app.route('/getUser', cors(corsOptions))
+    .get(function (request, response) {
+        db.query('SELECT * FROM Team2.UserAccount;', function (error, result, fields) {
+            if (error) {
+                console.log('Error message: ', error);
+                throw error;
+            };
+            console.log(result)
+            response.send(result);
+            //sent all item details
+        })
+    })
+
     // Basic things to include
     app.set('port', process.env.PORT || 3000);
     app.listen(app.get('port'), function () {
