@@ -1,0 +1,7 @@
+{
+  "name": "FindABuddy",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
