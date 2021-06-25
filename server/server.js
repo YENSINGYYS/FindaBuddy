@@ -25,6 +25,11 @@ const corsOptions = {
     }
     }
     app.options('*', cors(corsOptions));
+
+    app.get('/', cors(corsOptions), (req, res, next) => {
+        res.json({ message: 'Deployment has no issue' });
+        })
+
     const db = mysql.createPool({
     connectionLimit: 100,
     host: '182.50.133.92',
@@ -61,6 +66,19 @@ app.route('/getUser', cors(corsOptions))
             //send all details
         })
     })
+
+app.route('/', cors(corsOptions))
+.get(function (request, response) {
+    db.query('SELECT * FROM Team2.UserProfile where Gender=?;', function (error, result, fields) {
+        if (error) {
+            console.log('Error message: ', error);
+            throw error;
+        };
+        console.log(result)
+        response.send(result);
+        //send all details
+    })
+})
 
     // Basic things to include
     app.set('port', process.env.PORT || 3000);
