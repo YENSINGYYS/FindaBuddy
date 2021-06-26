@@ -40,32 +40,6 @@ export class Tab3Page {
       this.user = data
     });
   } */
-
- /*  async getUser(){
-    var url = 'https://itj-findabuddy.herokuapp.com/getUser';
-    var postData = JSON.stringify({
-      Gender: this.searchBuddy.value['gender']
-
-    })
-    console.log(postData)
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET,HEAD,PUT,PATCH,POST,DELETE'
-      })
-    };
-    this.http.post(url, postData, httpOptions).subscribe((data) => {
-      if (data != null) {
-        this.user = data;
-      
-      } else {
-        // this.failed()
-      }
-    }, error => {
-      console.log(error);
-    });
-  } */
   
 
   search(){
@@ -87,28 +61,15 @@ export class Tab3Page {
       })
     };
 
+    
+
     this.http.get(url).subscribe(data => {
       this.user = data
       console.log(data)
+      
     });
 
-   
-
-
-    /* this.http.post(url, postData, httpOptions).subscribe((data) => {
-      console.log(postData)
-      console.log(data);
-      if (data == true) {
-        this.user = data;
-        window.location.reload();
-      } else {
-        // this.failed()
-      }
-    }, error => {
-      console.log(error);
-    });
-    this.router.navigate(['tabs/tab3']);
-  }//if valid */
+  
 
   }
 

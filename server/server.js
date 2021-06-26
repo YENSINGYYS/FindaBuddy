@@ -56,7 +56,7 @@ const corsOptions = {
 //Get User Details
 app.route('/getUser', cors(corsOptions))
     .get(function (request, response) {
-        db.query('SELECT * FROM Team2.UserProfile where Gender=?;', function (error, result, fields) {
+        db.query('SELECT * FROM Team2.UserProfile where Gender=?;', [Gender], function (error, result, fields) {
             if (error) {
                 console.log('Error message: ', error);
                 throw error;
