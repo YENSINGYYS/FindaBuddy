@@ -55,13 +55,11 @@ const corsOptions = {
 
 //Get User Details
 app.route('/getUser', cors(corsOptions))
-    .get(function (request, response) {
-
-        var Gender = request.params.gender;
-        console.log(Gender)
-        var username = request.body.username;
+    .post(function (request, response) {
+        var GENDER = request.body.gender;
+       //var AGE = request.body.username;
        // var USERCREATED = request.params.USERCREATED;
-        db.query('SELECT * FROM Team2.UserProfile where Gender=?;', [Gender], function (error, result, fields) {
+        db.query('SELECT * FROM Team2.UserProfile where Gender=?;', [GENDER], function (error, result, fields) {
             if (error) {
                 console.log('Error message: ', error);
                 throw error;
@@ -72,6 +70,23 @@ app.route('/getUser', cors(corsOptions))
             //send all details
         })
     })
+    
+    app.route('/getUser', cors(corsOptions))
+    .post(function (request, response) {
+        var GENDER = request.body.gender;
+       //var AGE = request.body.username;
+       // var USERCREATED = request.params.USERCREATED;
+        db.query('SELECT * FROM Team2.UserProfile where Gender=?;', [GENDER], function (error, result, fields) {
+            if (error) {
+                console.log('Error message: ', error);
+                throw error;
+            };
+          //  console.log(Gender)
+            console.log(result)
+            response.send(result);
+            //send all details
+        })
+    })    
 
 
 

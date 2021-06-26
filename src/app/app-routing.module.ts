@@ -17,6 +17,10 @@ const routes: Routes = [
   {
     path: 'getUser',
     loadChildren: () => import('./tab3/tab3.module').then(m=> m.Tab3PageModule)
+  },
+  {
+    path: 'get-user',
+    loadChildren: () => import('./get-user/get-user.module').then( m => m.GetUserPageModule)
   }
 
 ];
