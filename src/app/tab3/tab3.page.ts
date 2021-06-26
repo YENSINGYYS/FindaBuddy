@@ -1,6 +1,6 @@
 import { Route } from '@angular/compiler/src/core';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormControl} from '@angular/forms';
 
@@ -18,8 +18,9 @@ export class Tab3Page {
   age: Int16Array;
   gender: string;
   location: string;
+  USERCREATED: string;
   fitnesslevel: string;
-  constructor(public http: HttpClient, private router: Router) {
+  constructor(private route: ActivatedRoute, public http: HttpClient, private router: Router) {
     
     this.searchBuddy = new FormGroup({
       age: new FormControl(),
@@ -28,6 +29,10 @@ export class Tab3Page {
       fitnesslevel: new FormControl(''),
 
     })
+
+
+  //  this.USERCREATED = this.route.snapshot.params.id;
+    
   }
 
   ngOnInit(){
@@ -47,12 +52,12 @@ export class Tab3Page {
     var url = 'https://itj-findabuddy.herokuapp.com/getUser';
 
     var postData = JSON.stringify({
-      //username: this.searchBuddy.value['username'],
-      Gender: this.searchBuddy.value['gender']
+      username: this.searchBuddy.value['age'],
+      gender: this.searchBuddy.value['gender']
+      //front end value
     });
 
     console.log(postData)
-
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -61,13 +66,25 @@ export class Tab3Page {
       })
     };
 
+    this.http.post(url, postData, httpOptions).subscribe((data) => {
+      console.log('postData:', postData)
+      console.log(data);
+      if (data == false) {
+        // this.failed()
+      }
+      else if (data == true) {
+        // this.successful()
+        window.location.reload();
+      }
+    }, error => {
+      console.log(error);
+    });
+
+    this.router.navigate(['tabs/tab2']); //once added relocate to tab2
     
 
-    this.http.get(url).subscribe(data => {
-      this.user = data
-      console.log(data)
+
       
-    });
 
   
 

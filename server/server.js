@@ -56,29 +56,25 @@ const corsOptions = {
 //Get User Details
 app.route('/getUser', cors(corsOptions))
     .get(function (request, response) {
+
+        var Gender = request.params.gender;
+        console.log(Gender)
+        var username = request.body.username;
+       // var USERCREATED = request.params.USERCREATED;
         db.query('SELECT * FROM Team2.UserProfile where Gender=?;', [Gender], function (error, result, fields) {
             if (error) {
                 console.log('Error message: ', error);
                 throw error;
             };
+          //  console.log(Gender)
             console.log(result)
             response.send(result);
             //send all details
         })
     })
 
-app.route('/', cors(corsOptions))
-.get(function (request, response) {
-    db.query('SELECT * FROM Team2.UserProfile where Gender=?;', function (error, result, fields) {
-        if (error) {
-            console.log('Error message: ', error);
-            throw error;
-        };
-        console.log(result)
-        response.send(result);
-        //send all details
-    })
-})
+
+
 
     // Basic things to include
     app.set('port', process.env.PORT || 3000);

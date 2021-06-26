@@ -110,11 +110,18 @@
   </ion-card>
   </form>
 
+  <div *ngIf="gender === 'undefined'; else loggedIn">
+
+  </div>
+
+  <ng-template #loggedIn>
+
   <ion-item *ngFor="let item of user">
 
     <ion-label>{{item.username}}</ion-label>
     <ion-label>{{item.gender}}</ion-label>
 
   </ion-item>
+</ng-template>
 
 </ion-content>
