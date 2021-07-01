@@ -53,13 +53,36 @@ const corsOptions = {
     });
     });
 
+
 //Get User Details
 app.route('/getUser', cors(corsOptions))
     .post(function (request, response) {
-        var GENDER = request.body.gender;
+        var ADDRESS = request.body.location;
+        var CURRENTUSER = request.body.currentUser
+
        //var AGE = request.body.username;
        // var USERCREATED = request.params.USERCREATED;
-        db.query('SELECT * FROM Team2.UserProfile where Gender=?;', [GENDER], function (error, result, fields) {
+        db.query('SELECT * FROM Team2.UserProfile where address like ? AND userID !=?;', ['%' + ADDRESS + '%', CURRENTUSER], function (error, result, fields) {
+            if (error) {
+                console.log('Error message: ', error);
+                throw error;
+            };
+          //  console.log(Gender)
+            console.log(result)
+           // userId = userID
+            response.send(result);
+            //send all details
+        })
+    });
+
+    app.route('/sendRequest', cors(corsOptions))
+    .post(function (request, response) {
+       // var ADDRESS = request.body.location;
+       //var AGE = request.body.username;
+       var RECEIVERID = request.body.receiverId;
+       var CURRENTUSER = request.body.currentUser
+       // var USERCREATED = request.params.USERCREATED;
+        db.query('INSERT INTO Team2.Request (requesterId, receiverId, status) VALUES (?,?,"Pending");', [CURRENTUSER, RECEIVERID], function (error, result, fields) {
             if (error) {
                 console.log('Error message: ', error);
                 throw error;
@@ -70,6 +93,7 @@ app.route('/getUser', cors(corsOptions))
             //send all details
         })
     })
+
 
 
     // Basic things to include

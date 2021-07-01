@@ -10,6 +10,20 @@
   --ion-color-primary-contrast-rgb: 255, 255, 255;
   --ion-color-primary-shade: #3171e0;
   --ion-color-primary-tint: #4c8dff;
+  .searchLabel{
+    font-size: 1rem;
+
+  }
+
+  .userList{
+    margin-bottom: -13%;
+  }
+
+  .input-wrapper{
+    margin: -2%;
+  }
+
+  
 
   /** secondary **/
   --ion-color-secondary: #3dc2ff;
@@ -234,3 +248,4 @@
     --ion-card-background: #1e1e1e;
   }
 }
+

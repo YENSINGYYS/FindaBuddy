@@ -1,8 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 3
+      Find A Buddy
     </ion-title>
+    <ion-icon slot="end" name="add"><ion-label id="currentUser">1</ion-label></ion-icon>
+
   </ion-toolbar>
 </ion-header>
 
@@ -13,12 +15,13 @@
     </ion-toolbar>
   </ion-header>
 
+  
+
   <!--Search Form-->
-  <form [formGroup]="searchBuddy">
+  <form [formGroup]="searchBuddy" class="searchForm">
     
-    <ion-card>
-    <ion-card-title style="font-size:1rem; padding-left:3%; padding-top:2%">Search</ion-card-title>
-    <ion-item> 
+   
+<!--     <ion-item> 
       <ion-label>Age:</ion-label>
 
       <ion-select formControlName="age">
@@ -35,28 +38,15 @@
           26-29
         </ion-select-option>
 
-      </ion-select>
-    </ion-item>
+        <ion-select-option value="26-29">
+          30 and above
+        </ion-select-option>
 
+      </ion-select>
+    </ion-item> -->
 
     <ion-item> 
-      <ion-label>Gender:</ion-label>
-
-      <ion-select formControlName="gender">
-
-        <ion-select-option value="male">
-          Male
-        </ion-select-option>
-
-        <ion-select-option value="female">
-          Female
-        </ion-select-option>
-
-      </ion-select>
-    </ion-item>
-
- <!--    <ion-item> 
-      <ion-label>Location: </ion-label>
+      <ion-label class="searchLabel">Location: </ion-label>
 
       <ion-select formControlName="location">
 
@@ -72,10 +62,39 @@
           Bishan
         </ion-select-option>
 
+        <ion-select-option value="Toa Payoh">
+          Toa Payoh
+        </ion-select-option>
+
+        <ion-select-option value="Hougang">
+          Hougang
+        </ion-select-option>
+
       </ion-select>
     </ion-item>
- 
+
+<!-- 
     <ion-item> 
+      <ion-label>Gender:</ion-label>
+
+      <ion-select formControlName="gender">
+
+        <ion-select-option value="male">
+          Male
+        </ion-select-option>
+
+        <ion-select-option value="female">
+          Female
+        </ion-select-option>
+
+        <ion-select-option value="none">
+          No Preferrence
+        </ion-select-option>
+
+      </ion-select>
+    </ion-item> -->
+ 
+   <!--  <ion-item> 
       <ion-label>Fitness Level</ion-label>
 
       <ion-select formControlName="fitnesslevel">
@@ -101,16 +120,45 @@
     </ion-button>
  
     
-  </ion-card>
   </form>
 
 
-
+  <ion-card>
   <ion-item *ngFor="let list of user">
 
-    <ion-label>{{list.username}}</ion-label>
-    <ion-label>{{list.Gender}}</ion-label>
-
+    <ion-list>
+  <!--     <ion-avatar slot="start">
+        <img src="./avatar-rey.png">
+      </ion-avatar> -->
+        <ion-label>
+          <ion-grid>
+            <ion-row>
+              <ion-col class="userList">
+                <h2>{{list.username}}</h2>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-grid>
+            <ion-row justify-content-end>
+              <ion-col no-padding>
+                <h4>{{list.Gender}}</h4>
+                <h4>{{list.fitnessLevel}}</h4>
+                <ion-icon name="send-outline" icon-right (click)="sendRequest()"><ion-label id="label1" style="display:none">{{list.userID}}</ion-label></ion-icon>
+              </ion-col>
+              <ion-col>
+                <h4>{{list.DOB}}</h4>
+               
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          
+        
+        </ion-label>
+  
+     
+    </ion-list>
   </ion-item>
+
+  </ion-card>
 
 </ion-content>

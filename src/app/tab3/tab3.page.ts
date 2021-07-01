@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormControl} from '@angular/forms';
+import { Plugins } from '@capacitor/core';
+const { Storage } = Plugins;
 
 @Component({
   selector: 'app-tab3',
@@ -13,24 +15,19 @@ export class Tab3Page {
 
   user: any = [];
   submitted: boolean = false;
+  send: boolean = true;
   searchBuddy: FormGroup;
- // age: Int16Array;
-  //gender: string;
-  //location: string;
-  //USERCREATED: string;
-  //fitnesslevel: string;
+
   constructor(private route: ActivatedRoute, public http: HttpClient, private router: Router) {
-    
+
     this.searchBuddy = new FormGroup({
       age: new FormControl(),
       gender: new FormControl(''),
+      location: new FormControl(''),
       //location: new FormControl(''),
       //fitnesslevel: new FormControl(''),
 
     })
-
-
-  //  this.USERCREATED = this.route.snapshot.params.id;
     
   }
 
@@ -40,6 +37,8 @@ export class Tab3Page {
 
    }
   }
+
+
 
 /*   async getUser(){
     var url = 'https://itj-findabuddy.herokuapp.com/getUser';
@@ -52,13 +51,15 @@ export class Tab3Page {
   search(){
     this.submitted =true;
     var url = 'https://itj-findabuddy.herokuapp.com/getUser';
+    console.log(document.getElementById('currentUser').textContent)
 
     var postData = JSON.stringify({
-    //  username: this.searchBuddy.value['age'],
-      gender: this.searchBuddy.value['gender']
+      location: this.searchBuddy.value['location'],
+      currentUser: document.getElementById("currentUser").textContent
       //front end value
     });
 
+ 
     console.log(postData)
  
     const httpOptions = {
@@ -81,24 +82,40 @@ export class Tab3Page {
 
   }
 
-/*     this.http.get(url).subscribe((data) => {
-      console.log('postData:', postData)
-      console.log('DATA:', data);
-      if (data == false) {
-        // this.failed()
-        console.log("failed")
-      }
-      else if (data == true) {
-        // this.successful()
-        console.log("succeed")
-        window.location.reload();
-      }
-    }, error => {
-      console.log(error);
+  
+
+  sendRequest(){
+    this.submitted =true;
+    var url = 'https://itj-findabuddy.herokuapp.com/sendRequest';
+
+    var postData = JSON.stringify({
+     currentUser: document.getElementById("currentUser").textContent,
+     receiverId: document.getElementById('label1').textContent
+      //front end value
     });
- */
-  //  this.router.navigate(['tabs/tab2']); //once added relocate to tab2
-    
+
+ 
+    console.log(postData)
+ 
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,HEAD,PUT,PATCH,POST,DELETE'
+      })
+    };
+
+    this.http.post(url, postData, httpOptions).subscribe((data) => {
+      console.log('postData:', postData)
+      console.log('data', data);
+      
+      }, error => {
+          console.log(error);
+      });
+
+
+      this.router.navigate(['tabs/tab3']); //Navigate to tab3
+    }
   }
 
 
