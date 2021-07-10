@@ -53,6 +53,23 @@ const corsOptions = {
     });
     });
 
+//login authentication 
+app.route('/authentication', cors(corsOptions))
+    .post(function (request, response) {
+        var EMAIL = request.body.email;
+        var PASSWORD = request.body.password
+        db.query('SELECT username FROM Team2.UserAccount where email = ? and password = ?;', [EMAIL, PASSWORD], function (error, result, fields) {
+            if (error) {
+                console.log('Error message: ', error);
+                throw error;
+            };
+            console.log(result)
+            response.send(result);
+            //send all details
+        })
+    });
+
+    
 
 //Get User Details
 app.route('/getUser', cors(corsOptions))
@@ -95,6 +112,20 @@ app.route('/getUser', cors(corsOptions))
     })
 
 
+    //get request notification
+
+    app.route('/notification/:USERID', cors(corsOptions))
+    .get(function (request, response) {
+        var USERID = request.params.userId
+        db.query('select up.username, up.Gender, up.fitnessLevel, up.DOB, r.receiverId from Team2.Request r inner join Team2.UserProfile up where r.receiverId = ?;', [USERID], function (error, result, fields) {
+            if (error) {
+                console.log('Error message: ', error);
+                throw error;
+            };
+            console.log(result)
+            response.send(result);
+        })
+    });
 
     // Basic things to include
     app.set('port', process.env.PORT || 3000);

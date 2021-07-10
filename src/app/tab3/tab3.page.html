@@ -3,7 +3,15 @@
     <ion-title>
       Find A Buddy
     </ion-title>
-    <ion-icon slot="end" name="add"><ion-label id="currentUser">1</ion-label></ion-icon>
+    
+            <!--Notification Button-->
+            <ion-buttons slot="end">
+
+              <ion-button color="primary" [routerLink]="['/notification', userId]">
+                <ion-icon slot="icon-only" name="notifications-circle-outline"><ion-label id="currentUser">1</ion-label></ion-icon>
+              </ion-button>
+
+            </ion-buttons>
 
   </ion-toolbar>
 </ion-header>
@@ -152,7 +160,8 @@
             </ion-row>
           </ion-grid>
           
-        
+
+
         </ion-label>
   
      

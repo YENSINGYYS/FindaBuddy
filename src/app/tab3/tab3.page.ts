@@ -17,6 +17,7 @@ export class Tab3Page {
   submitted: boolean = false;
   send: boolean = true;
   searchBuddy: FormGroup;
+  userId: string = '2';
 
   constructor(private route: ActivatedRoute, public http: HttpClient, private router: Router) {
 
@@ -36,17 +37,7 @@ export class Tab3Page {
    if (this.submitted == false){
 
    }
-  }
-
-
-
-/*   async getUser(){
-    var url = 'https://itj-findabuddy.herokuapp.com/getUser';
-    this.http.get(url).subscribe(data => {
-      this.user = data
-    });
-  } */
-  
+  }  
 
   search(){
     this.submitted =true;
