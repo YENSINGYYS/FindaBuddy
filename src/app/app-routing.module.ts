@@ -24,6 +24,20 @@ const routes: Routes = [
   },
 
 
+  {
+    path: 'tab1/:id',
+    loadChildren: () => import('./tab1/tab1.module').then( m => m.Tab1PageModule)
+  },
+  {
+    path: 'tab3/:id',
+    loadChildren: () => import('./tab3/tab3.module').then( m => m.Tab3PageModule)
+  },
+  {
+    path: 'authentication',
+    loadChildren: () => import('./notification/notification.module').then( m => m.NotificationPageModule)
+  },
+
+
 ];
 @NgModule({
   imports: [

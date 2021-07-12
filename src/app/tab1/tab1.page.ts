@@ -17,6 +17,8 @@ export class Tab1Page {
   currentUser: string;
   userEmail: string;
 
+  id: string;
+
   constructor(private route: ActivatedRoute, public http: HttpClient, private router: Router, private modalController:ModalController) {
 
     
@@ -27,15 +29,16 @@ export class Tab1Page {
     });
     return await modal.present();
   }
-  async getItem() {
-    const { value } = await Storage.get({ key: 'email' });
+
+  async loginUser() {
+    const { value } = await Storage.get({ key: 'userID' });
     console.log('Got item: ', value);
-    this.userEmail = value;
+    this.id = value;
+    console.log(this.id)
   }
 
-
   ngOnInit(){
-    this.getItem()
+    this.loginUser()
 
   }
   

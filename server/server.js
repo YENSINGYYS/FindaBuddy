@@ -58,7 +58,7 @@ app.route('/authentication', cors(corsOptions))
     .post(function (request, response) {
         var EMAIL = request.body.email;
         var PASSWORD = request.body.password
-        db.query('SELECT username FROM Team2.UserAccount where email = ? and password = ?;', [EMAIL, PASSWORD], function (error, result, fields) {
+        db.query('SELECT userID FROM Team2.UserAccount where email = ? and password = ?;', [EMAIL, PASSWORD], function (error, result, fields) {
             if (error) {
                 console.log('Error message: ', error);
                 throw error;
@@ -116,8 +116,8 @@ app.route('/getUser', cors(corsOptions))
 
     app.route('/notification/:USERID', cors(corsOptions))
     .get(function (request, response) {
-        var USERID = request.params.userId
-        db.query('select up.username, up.Gender, up.fitnessLevel, up.DOB, r.receiverId from Team2.Request r inner join Team2.UserProfile up where r.receiverId = ?;', [USERID], function (error, result, fields) {
+        var USERID = request.params.USERID
+        db.query('select up.username, up.Gender, up.fitnessLevel, up.DOB, r.receiverId, r.idRequest from Team2.Request r inner join Team2.UserProfile up where (r.requesterId = up.userID and r.receiverId=?) and status="Pending";', [USERID], function (error, result, fields) {
             if (error) {
                 console.log('Error message: ', error);
                 throw error;
@@ -126,6 +126,23 @@ app.route('/getUser', cors(corsOptions))
             response.send(result);
         })
     });
+
+    //UPDATE REQUEST STATUS
+    app.route('/update', cors(corsOptions))
+    .post(function (request, response) {
+        var REQUESTID = request.body.requestId
+        var STATUS = request.body.status
+        db.query('UPDATE Team2.Request SET status = ? where idRequest = ?;', [STATUS, REQUESTID], function (error, result, fields) {
+            if (error) {
+                console.log('Error message: ', error);
+                throw error;
+            };
+            console.log(result)
+            response.send(result);
+        })
+    });
+ 
+
 
     // Basic things to include
     app.set('port', process.env.PORT || 3000);

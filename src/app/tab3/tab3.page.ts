@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormControl} from '@angular/forms';
 import { Plugins } from '@capacitor/core';
+
 const { Storage } = Plugins;
 
 @Component({
@@ -17,7 +18,9 @@ export class Tab3Page {
   submitted: boolean = false;
   send: boolean = true;
   searchBuddy: FormGroup;
-  userId: string = '2';
+
+  id: string;
+  userEmail: string; 
 
   constructor(private route: ActivatedRoute, public http: HttpClient, private router: Router) {
 
@@ -32,12 +35,17 @@ export class Tab3Page {
     
   }
 
-  ngOnInit(){
-   // this.getUser();
-   if (this.submitted == false){
+  async loginUser() {
+    const { value } = await Storage.get({ key: 'userID' });
+    console.log('Got item: ', value);
+    this.id = value;
+    console.log(this.id)
+  }
 
-   }
-  }  
+  ngOnInit(){
+    this.loginUser()
+
+  }
 
   search(){
     this.submitted =true;
@@ -45,8 +53,9 @@ export class Tab3Page {
     console.log(document.getElementById('currentUser').textContent)
 
     var postData = JSON.stringify({
-      location: this.searchBuddy.value['location'],
-      currentUser: document.getElementById("currentUser").textContent
+      currentUser: document.getElementById("currentUser").textContent,
+
+      location: this.searchBuddy.value['location']
       //front end value
     });
 
@@ -82,7 +91,8 @@ export class Tab3Page {
     var postData = JSON.stringify({
      currentUser: document.getElementById("currentUser").textContent,
      receiverId: document.getElementById('label1').textContent
-      //front end value
+
+     //front end value
     });
 
  
@@ -107,6 +117,8 @@ export class Tab3Page {
 
       this.router.navigate(['tabs/tab3']); //Navigate to tab3
     }
+
+
   }
 
 

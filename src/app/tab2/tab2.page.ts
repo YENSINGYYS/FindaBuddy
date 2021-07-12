@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab2',
@@ -7,6 +9,12 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
+  id: string;
+  constructor(private route: ActivatedRoute, public http: HttpClient, private router: Router) {}
 
+  ngOnInit(){
+
+    this.id = this.route.snapshot.params.email
+
+  }
 }
