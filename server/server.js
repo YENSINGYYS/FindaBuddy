@@ -4,7 +4,6 @@ const app = express();
 var bodyParser = require('body-parser');
 var methodOvereide = require('method-override');
 var cors = require('cors');
-var session = require('express-session');
 app.use(cors());
 app.use(bodyParser.json());
 app.use(methodOvereide());
@@ -92,9 +91,11 @@ app.route('/getUser', cors(corsOptions))
 
     app.route('/sendRequest', cors(corsOptions))
     .post(function (request, response) {
-  
+       // var ADDRESS = request.body.location;
+       //var AGE = request.body.username;
        var RECEIVERID = request.body.receiverId;
        var CURRENTUSER = request.body.currentUser
+       // var USERCREATED = request.params.USERCREATED;
         db.query('INSERT INTO Team2.Request (requesterId, receiverId, status) VALUES (?,?,"Pending");', [CURRENTUSER, RECEIVERID], function (error, result, fields) {
             if (error) {
                 console.log('Error message: ', error);
@@ -114,7 +115,7 @@ app.route('/getUser', cors(corsOptions))
     app.route('/notification/:id', cors(corsOptions))
     .get(function (request, response) {
         var USERID = request.params.id
-        db.query('select up.username, up.Gender, up.fitnessLevel, up.DOB, r.requesterId, r.receiverId, r.idRequest, up.image from Team2.Request r inner join Team2.UserProfile up where (r.requesterId = up.userID and r.receiverId=?) and status="Pending";', [USERID], function (error, result, fields) {
+        db.query('select up.username, up.Gender, up.fitnessLevel, up.DOB, r.requesterId, r.receiverId, r.idRequest from Team2.Request r inner join Team2.UserProfile up where (r.requesterId = up.userID and r.receiverId=?) and status="Pending";', [USERID], function (error, result, fields) {
             if (error) {
                 console.log('Error message: ', error);
                 throw error;
@@ -138,41 +139,9 @@ app.route('/getUser', cors(corsOptions))
             response.send(result);
         })
 
-        var USERID1 = request.body.userid1
-        var BUDDYID1 = request.body.buddyid1
-        var USERID2 = request.body.userid2
-        var BUDDYID2 = request.body.buddyid2
-      
-      
-        db.query('INSERT INTO Team2.Buddy (buddyID, userID) VALUES (?,?), (?,?)', [USERID1, BUDDYID1, USERID2, BUDDYID2], function (error, result, fields) {
-            if (error) {
-                console.log('Error message: ', error);
-                throw error;
-            };
-            console.log(result)
-            response.send(result);
-        })
+        
 
     });
-
-    //Jie Xiang's 
-    
-    //get newsfeeds
-    app.route('/NewsFeeds', cors(corsOptions)).get(function (request, response) {    
-        var idNewsFeeds = request.body.idNewsFeeds;
-        var userID = request.body.userID;
-        db.query('SELECT * FROM NewsFeeds WHERE userID = ? order by idNewsFeeds desc;',[idNewsFeeds,userID],
-        function (error, result, fields) {
-        if (error) {
-        console.log('Error message: ', error);
-        throw error;
-        };
-        
-        console.log(result)
-        response.send(result);
-        //sent all item details
-        })
-        })
 
    
  

@@ -52,13 +52,10 @@
       </ion-select>
     </ion-item> -->
 
-    <ion-item class="locationLabel"> 
-      <ion-label  class="searchLabel">Location: </ion-label>
-      <ion-label *ngIf="searchBuddy.controls.location.errors && submitted" color="danger">
-        Please select a location 
-      </ion-label>
+    <ion-item> 
+      <ion-label class="searchLabel">Location: </ion-label>
+
       <ion-select formControlName="location">
-        
 
         <ion-select-option value="amk">
           Ang Mo Kio
@@ -83,6 +80,46 @@
       </ion-select>
     </ion-item>
 
+<!-- 
+    <ion-item> 
+      <ion-label>Gender:</ion-label>
+
+      <ion-select formControlName="gender">
+
+        <ion-select-option value="male">
+          Male
+        </ion-select-option>
+
+        <ion-select-option value="female">
+          Female
+        </ion-select-option>
+
+        <ion-select-option value="none">
+          No Preferrence
+        </ion-select-option>
+
+      </ion-select>
+    </ion-item> -->
+ 
+   <!--  <ion-item> 
+      <ion-label>Fitness Level</ion-label>
+
+      <ion-select formControlName="fitnesslevel">
+
+        <ion-select-option value="5">
+          5
+        </ion-select-option>
+
+        <ion-select-option value="4">
+          4
+        </ion-select-option>
+
+        <ion-select-option value="3">
+          3
+        </ion-select-option>
+
+      </ion-select>
+    </ion-item> -->
 
     <!--add update button-->
     <ion-button expand="block" color="secondary" (click)="search()">
@@ -92,42 +129,62 @@
     
   </form>
 
-<ion-card>
-  <ion-list *ngFor="let list of user">
-    <ion-item>
-      <ion-avatar slot="start">
-        <img [src]=list.image class="image-card">
-      </ion-avatar>
-      <ion-label>
-        <div class="test">
-        <h2 id="username">{{list.username}}</h2>
-        <h4>{{list.Gender}}</h4>
-        <h4>{{list.fitnessLevel}}</h4>
-        <h4>{{list.DOB}}</h4>
-      </div>
-      </ion-label>
+
+  <ion-card>
+  <ion-item *ngFor="let list of user">
+
+      <!--     <ion-avatar slot="start">
+          <img src="./avatar-rey.png">
+        </ion-avatar> -->
         <ion-label>
-        <div id="sendButton">  
-          <ion-button slot="end" id="sendRequest" size="small" (click)="sendRequest()">
-          <ion-icon style="float: right;" slot="icon-only" name="send-outline">
-            <ion-label id="label1" style="display:none">{{list.userID}}</ion-label>
-            <p>Reject</p>
-          
-          </ion-icon>
-        </ion-button>
-    </div>
+          <ion-grid [fixed]="true">
+            
+  
+
+    <ion-row>
+      <ion-col>
+        <h2 id="username">{{list.username}}</h2>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <h4>{{list.Gender}}</h4>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <h4>{{list.fitnessLevel}}</h4>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <h4>{{list.DOB}}</h4>
+      </ion-col>
+
+      <ion-col>
+          <div id="sendButton">  
+            <ion-button id="sendRequest" size="small" (click)="sendRequest()">
+            <ion-icon style="float: right;" slot="icon-only" name="send-outline">
+              <ion-label id="label1" style="display:none">{{list.userID}}</ion-label>
+              <p>Reject</p>
+            
+            </ion-icon>
+          </ion-button>
+      </div>
+    </ion-col>
+
+  </ion-row>
+        
+        </ion-grid>
+      
       </ion-label>
+
     </ion-item>
 
-      
-
-  </ion-list>
-
-
 </ion-card>
-
- 
-  </ion-content>
 
 
 

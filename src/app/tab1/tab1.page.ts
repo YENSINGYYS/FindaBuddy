@@ -5,7 +5,6 @@ import { ModalController } from '@ionic/angular';
 import { LoginPage } from '../login/login.page';
 import { async } from '@angular/core/testing';
 import { Plugins } from '@capacitor/core';
-import { ThrowStmt } from '@angular/compiler';
 
 const { Storage } = Plugins;
 
@@ -19,7 +18,7 @@ export class Tab1Page {
   userEmail: string;
 
   id: string;
-  test: string;
+
   constructor(private route: ActivatedRoute, public http: HttpClient, private router: Router, private modalController:ModalController) {
 
     
@@ -39,7 +38,6 @@ export class Tab1Page {
   }
 
   ngOnInit(){
-    
     this.loginUser()
 
   }
