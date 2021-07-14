@@ -7,6 +7,14 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
+    path: 'authentication',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'tab1',
+    loadChildren: () => import('./tab1/tab1.module').then( m => m.Tab1PageModule)
+  },
+  {
     path: 'tab4',
     loadChildren: () => import('./tab4/tab4.module').then( m => m.Tab4PageModule)
   },
@@ -22,20 +30,11 @@ const routes: Routes = [
     path: 'notification/:id',
     loadChildren: () => import('./notification/notification.module').then( m => m.NotificationPageModule)
   },
-
-
-  {
-    path: 'tab1/:id',
-    loadChildren: () => import('./tab1/tab1.module').then( m => m.Tab1PageModule)
-  },
   {
     path: 'tab3/:id',
     loadChildren: () => import('./tab3/tab3.module').then( m => m.Tab3PageModule)
   },
-  {
-    path: 'authentication',
-    loadChildren: () => import('./notification/notification.module').then( m => m.NotificationPageModule)
-  },
+
 
 
 ];

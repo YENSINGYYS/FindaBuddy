@@ -76,9 +76,6 @@ app.route('/getUser', cors(corsOptions))
     .post(function (request, response) {
         var ADDRESS = request.body.location;
         var CURRENTUSER = request.body.currentUser
-
-       //var AGE = request.body.username;
-       // var USERCREATED = request.params.USERCREATED;
         db.query('SELECT * FROM Team2.UserProfile where address like ? AND userID !=?;', ['%' + ADDRESS + '%', CURRENTUSER], function (error, result, fields) {
             if (error) {
                 console.log('Error message: ', error);
@@ -109,15 +106,16 @@ app.route('/getUser', cors(corsOptions))
             response.send(result);
             //send all details
         })
+        
     })
 
 
     //get request notification
 
-    app.route('/notification/:USERID', cors(corsOptions))
+    app.route('/notification/:id', cors(corsOptions))
     .get(function (request, response) {
-        var USERID = request.params.USERID
-        db.query('select up.username, up.Gender, up.fitnessLevel, up.DOB, r.receiverId, r.idRequest from Team2.Request r inner join Team2.UserProfile up where (r.requesterId = up.userID and r.receiverId=?) and status="Pending";', [USERID], function (error, result, fields) {
+        var USERID = request.params.id
+        db.query('select up.username, up.Gender, up.fitnessLevel, up.DOB, r.requesterId, r.receiverId, r.idRequest from Team2.Request r inner join Team2.UserProfile up where (r.requesterId = up.userID and r.receiverId=?) and status="Pending";', [USERID], function (error, result, fields) {
             if (error) {
                 console.log('Error message: ', error);
                 throw error;
@@ -140,7 +138,12 @@ app.route('/getUser', cors(corsOptions))
             console.log(result)
             response.send(result);
         })
+
+        
+
     });
+
+   
  
 
 

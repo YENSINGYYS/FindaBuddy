@@ -8,11 +8,11 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1/:id',
+        path: 'tab1',
         loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
       },
       {
-        path: 'notification',
+        path: 'notification/:id',
         loadChildren: () => import('../notification/notification.module').then(m => m.NotificationPageModule)
       },
       {

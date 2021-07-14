@@ -28,9 +28,6 @@ export class Tab3Page {
       age: new FormControl(),
       gender: new FormControl(''),
       location: new FormControl(''),
-      //location: new FormControl(''),
-      //fitnesslevel: new FormControl(''),
-
     })
     
   }
@@ -50,10 +47,9 @@ export class Tab3Page {
   search(){
     this.submitted =true;
     var url = 'https://itj-findabuddy.herokuapp.com/getUser';
-    console.log(document.getElementById('currentUser').textContent)
 
     var postData = JSON.stringify({
-      currentUser: document.getElementById("currentUser").textContent,
+      currentUser: this.id,
 
       location: this.searchBuddy.value['location']
       //front end value
@@ -89,7 +85,7 @@ export class Tab3Page {
     var url = 'https://itj-findabuddy.herokuapp.com/sendRequest';
 
     var postData = JSON.stringify({
-     currentUser: document.getElementById("currentUser").textContent,
+     currentUser: this.id,
      receiverId: document.getElementById('label1').textContent
 
      //front end value
