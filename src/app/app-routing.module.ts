@@ -11,7 +11,7 @@ const routes: Routes = [
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'tab1',
+    path: 'tabs/tab1/:id',
     loadChildren: () => import('./tab1/tab1.module').then( m => m.Tab1PageModule)
   },
   {

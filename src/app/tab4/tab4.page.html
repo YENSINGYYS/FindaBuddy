@@ -1,9 +1,35 @@
-<ion-header>
+<ion-header [translucent]="true"> 
   <ion-toolbar>
-    <ion-title>tab4</ion-title>
+    <ion-title>News Feeds</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="secondary" [routerLink]="['/addnewsfeeds']">
+      <ion-icon color="secondary" slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+      </ion-buttons>
   </ion-toolbar>
+  
 </ion-header>
 
 <ion-content>
-
+    <ion-list>
+      <ion-item *ngFor="let item of NewsFeeds">
+      <!-- <ion-thumbnail slot='start'>
+      <img [src]=item.picture>
+      </ion-thumbnail> -->
+      <!-- <img src="../../assets/newsfeedsimg/labixiaoxing.jpg"> -->
+      <ion-label>
+      <h2>Title: {{item.title}} </h2>
+      <img width="100%" height="450" src="{{item.picture}}" class="full-image">
+      <p>
+      
+      </p>
+      <h2>Caption: {{item.caption}} </h2>
+      <p>Picture: {{item.picture}} </p>
+      <p>Create Date: {{item.create_date}}        Edit Date: {{item.edit_date}}       User ID: {{item.userID}}</p>
+      <hr>
+      </ion-label>
+      <ion-icon class="l" name="create-outline" [routerLink]="['/editnewsfeeds',item.idNewsFeeds]" [queryParams]="{idNewsFeeds: item.idNewsFeeds}" ></ion-icon>
+      <ion-icon class="r" name="trash-outline" id={item.idNewsFeeds} (click) ='delete(item)' ></ion-icon>
+      </ion-item>
+      </ion-list>
 </ion-content>
